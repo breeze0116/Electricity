@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">电力知识APP</string>
+    
+    <string name="tab_home">首页</string>
+    <string name="tab_ranking">排行榜</string>
+    <string name="tab_favorites">收藏</string>
+    <string name="tab_info">信息</string>
+    <string name="tab_more">关于</string>
+    
+    <string name="answer_title">答案选项</string>
+    <string name="add_favourite">添加收藏</string>
+    <string name="view_answer">查看答案</string>
+    
+    <string name="search_hint">输入关键字搜索</string>
+    <string name="app_version_info">电力知识客户端\n\nVersion 1.0.0</string>
+    <string name="plase_wait_loading">请稍候，正在努力加载...</string>
+    
+    <string name="main_check_update_version">正在检测版本更新...</string>
+    <string name="main_check_update_res">正在检测资源更新...</string>
+
+</resources>
