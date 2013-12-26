@@ -27,6 +27,9 @@ public class Constants {
 	// APP自动更新下载路径
 	public static final String APP_DOWN_PATH = BASE_PATH + "update/";
 	
+	//DB路径
+	public static final String APP_DB_PATH = BASE_PATH + "db/";
+	
 	//题目下载路径
 	public static final String QUESTION_DOWN_PATH = BASE_PATH + "question/";
 	

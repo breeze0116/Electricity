@@ -7,6 +7,7 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 
 import android.R.bool;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -21,6 +22,7 @@ import android.widget.TextView;
 import com.breeze.eapp.R;
 import com.breeze.eapp.base.BaseActivity;
 import com.breeze.eapp.config.Constants;
+import com.breeze.eapp.db.DBHelper;
 import com.breeze.eapp.utils.CommonTools;
 import com.breeze.eapp.utils.HttpUtil;
 
@@ -121,6 +123,13 @@ public class MainActivity extends BaseActivity {
 				sleep(3000);
 				/**************************资源更新检测******************************/
 				Log.i(Constants.DEBUG_TAG, "资源更新检测.....");
+				DBHelper dbHelper = new DBHelper(MainActivity.this);
+				SQLiteDatabase db = dbHelper.openDatabase();
+				db.beginTransaction();
+				db.execSQL("update question set flag = 1");
+				db.setTransactionSuccessful();
+				db.endTransaction();
+				db.close();
 				sendMsg(1);
 				sleep(3000);
 				initFinish = true;
