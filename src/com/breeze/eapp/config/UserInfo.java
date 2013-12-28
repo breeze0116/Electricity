@@ -69,7 +69,7 @@ public class UserInfo {
 			topicEntity = new TopicEntity();
 			topicEntity.id = cursor.getInt(cursor.getColumnIndex("qid"));
 			topicEntity.index = index;
-			topicEntity.image = "demo_0.jpg";
+			topicEntity.image = "icon_0.png";
 			topicEntity.title = cursor.getString(cursor.getColumnIndex("question"));
 			topicEntity.result = cursor.getString(cursor.getColumnIndex("answer")).replaceAll(",", "");
 			topicEntity.tip = cursor.getString(cursor.getColumnIndex("remark"));
@@ -131,7 +131,7 @@ public class UserInfo {
 			topicEntity = new TopicEntity();
 			topicEntity.id = cursor.getInt(cursor.getColumnIndex("qid"));
 			topicEntity.index = index;
-			topicEntity.image = "demo_0.jpg";
+			topicEntity.image = "icon_0.png";
 			topicEntity.title = cursor.getString(cursor.getColumnIndex("question"));
 			topicEntity.result = cursor.getString(cursor.getColumnIndex("answer")).replaceAll(",", "");
 			topicEntity.tip = cursor.getString(cursor.getColumnIndex("remark"));
