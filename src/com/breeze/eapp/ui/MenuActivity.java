@@ -10,6 +10,7 @@ import android.widget.GridView;
 
 import com.breeze.eapp.AppSetting;
 import com.breeze.eapp.R;
+import com.breeze.eapp.config.UserInfo;
 import com.breeze.eapp.entity.MenuEntity;
 import com.breeze.eapp.res.MenuAdapter;
 import com.breeze.eapp.res.MenuLoader;
@@ -20,7 +21,7 @@ public class MenuActivity extends com.breeze.eapp.base.BaseActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
     	this.hideTitleBar();
-    	this.bindDoubleClickExit();
+    	//this.bindDoubleClickExit();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu);
         initView();
@@ -44,6 +45,8 @@ public class MenuActivity extends com.breeze.eapp.base.BaseActivity {
 				}else{
 					String[] keys = new String[]{AppSetting.MENU_KEY,AppSetting.MENU_TITLE};
 					Object[] vals = new Object[]{menu.value,menu.title};
+					//初始化关卡题目
+					UserInfo.setModeWithStage(MenuActivity.this, menu.value);
 					ActivitySwitcher.switchTo(MenuActivity.this, menu.nextUI,keys,vals);
 				}
 			}

@@ -3,12 +3,17 @@
 
     <string-array name="menu_config">
         <!-- value 为0，则进行搜索 -->
-        <item >{icon:"icon_0.png",value:"0",title:"搜索题库",activity=".ui.SearchActivity"}</item>
-        <item >{icon:"icon_2.png",value:"1",title:"考试题库",activity=".ui.CategoryActivity"}</item>
-        <item >{icon:"icon_3.png",value:"1",title:"备用菜单",activity=".ui.CategoryActivity"}</item>
-        <item >{icon:"icon_4.png",value:"1",title:"备用菜单",activity=".ui.CategoryActivity"}</item>
-        <item >{icon:"icon_5.png",value:"1",title:"备用菜单",activity=".ui.HistoryActivity"}</item>
-        <item >{icon:"icon_6.png",value:"1",title:"备用菜单",activity=".ui.CategoryActivity"}</item>
+        <!--<item >{icon:"icon_0.png",value:"0",title:"搜索题库",activity=".ui.SearchActivity"}</item>-->
+        <item >{icon:"icon_0.png",value:"1",title:"第一关",activity=".ui.ExtraTopicActivity"}</item>
+        <item >{icon:"icon_2.png",value:"2",title:"第二关",activity=".ui.ExtraTopicActivity"}</item>
+        <item >{icon:"icon_3.png",value:"3",title:"第三关",activity=".ui.ExtraTopicActivity"}</item>
+        <item >{icon:"icon_4.png",value:"4",title:"第四关",activity=".ui.ExtraTopicActivity"}</item>
+        <item >{icon:"icon_5.png",value:"5",title:"第五关",activity=".ui.ExtraTopicActivity"}</item>
+        <item >{icon:"icon_6.png",value:"6",title:"第六关",activity=".ui.ExtraTopicActivity"}</item>
+        <item >{icon:"icon_7.png",value:"7",title:"第七关",activity=".ui.ExtraTopicActivity"}</item>
+        <item >{icon:"icon_8.png",value:"8",title:"第八关",activity=".ui.ExtraTopicActivity"}</item>
+        <item >{icon:"icon_9.png",value:"9",title:"第九关",activity=".ui.ExtraTopicActivity"}</item>
+        <item >{icon:"icon_10.png",value:"10",title:"第十关",activity=".ui.ExtraTopicActivity"}</item>
         
     </string-array>
 

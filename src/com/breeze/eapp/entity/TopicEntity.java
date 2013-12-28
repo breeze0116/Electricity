@@ -18,6 +18,8 @@ package com.breeze.eapp.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.R.bool;
+
 /**
  * 
  * @author cfuture.chenyoca [桥下一粒砂] (chenyoca@163.com)
@@ -39,4 +41,5 @@ public class TopicEntity {
 	public String tip;
 	public List<AnswerEntity> answers = new ArrayList<AnswerEntity>();
 	public String result;
+	public boolean isAnswer;//是否已做答
 }

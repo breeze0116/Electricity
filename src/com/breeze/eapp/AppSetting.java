@@ -13,7 +13,7 @@ import java.util.TreeSet;
  */
 public final class AppSetting {
 	public final static String APP_TAG = "TopicBank";
-	public final static String TOPIC_INDEX = "第%d题";
+	public final static String TOPIC_INDEX = "第%d题(%s)";
 	public final static String MENU_KEY = "VALUE";
 	public final static String MENU_TITLE = "TITLE";
 	

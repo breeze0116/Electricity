@@ -120,18 +120,18 @@ public class MainActivity extends BaseActivity {
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
-				sleep(3000);
-				/**************************资源更新检测******************************/
-				Log.i(Constants.DEBUG_TAG, "资源更新检测.....");
+				
+				/**************************初始化DB******************************/
+				Log.i(Constants.DEBUG_TAG, "初始化DB.....");
+				sendMsg(1);
 				DBHelper dbHelper = new DBHelper(MainActivity.this);
 				SQLiteDatabase db = dbHelper.openDatabase();
-				db.beginTransaction();
-				db.execSQL("update question set flag = 1");
-				db.setTransactionSuccessful();
-				db.endTransaction();
 				db.close();
-				sendMsg(1);
-				sleep(3000);
+				
+				/**************************资源更新检测******************************/
+				Log.i(Constants.DEBUG_TAG, "资源更新检测.....");
+				sendMsg(2);
+				sleep(1000);
 				initFinish = true;
 			}
 			
@@ -162,6 +162,9 @@ public class MainActivity extends BaseActivity {
 					break;
 				case 1:
 					textView.setText(R.string.main_check_update_res);
+					break;
+				case 2:
+					textView.setText(R.string.main_init_db);
 					break;
 				}
 			}

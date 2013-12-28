@@ -63,7 +63,7 @@ public class HomeActivity extends TabActivity implements OnCheckedChangeListener
 	 * 准备tab的内容Intent
 	 */
 	private void prepareIntent() {
-		mHomeIntent = new Intent(this,MenuActivity.class);
+		mHomeIntent = new Intent(this,IndexActivity.class);
 		mCategoryIntent = new Intent(this, CategoryActivity.class);
 		mFavoIntent = new Intent(this, CategoryActivity.class);
 		mSearchIntent = new Intent(this, CategoryActivity.class);
@@ -144,7 +144,7 @@ public class HomeActivity extends TabActivity implements OnCheckedChangeListener
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
-			ConfirmExit();
+			//ConfirmExit();
 			return true;
 		}
 		return super.onKeyDown(keyCode, event);

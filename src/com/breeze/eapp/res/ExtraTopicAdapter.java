@@ -20,8 +20,11 @@ import android.widget.Toast;
 
 import com.breeze.eapp.AppSetting;
 import com.breeze.eapp.R;
+import com.breeze.eapp.config.Constants;
+import com.breeze.eapp.config.UserInfo;
 import com.breeze.eapp.entity.AnswerEntity;
 import com.breeze.eapp.entity.TopicEntity;
+import com.breeze.eapp.utils.Util;
 import com.breeze.eapp.widget.ImageDialog;
 import com.breeze.eapp.widget.TipDialog;
 import com.lurencun.android.support.v2.widget.ViewPager;
@@ -54,7 +57,13 @@ public class ExtraTopicAdapter extends ViewPagerAdapter<TopicEntity> {
 		
 		final TopicEntity topic = data;
 		
-		index.setText(String.format(AppSetting.TOPIC_INDEX, topic.index));
+		String toppicType = "单选";
+		if(topic.type.equals(TopicEntity.TopicType.MULTIPLE_CHOICE))
+			toppicType = "多选";
+		else if (topic.type.equals(TopicEntity.TopicType.JUDGE)) 
+			toppicType = "判断";
+
+		index.setText(String.format(AppSetting.TOPIC_INDEX, topic.index + 1,toppicType));
 		content.setText(topic.title);
 		createAnswerGroup(answerLayout,topic);
 		Bitmap tempImage = BitmapScaleUitl.prorateThumbnail(AssetsReader.readBitmap(mContext, topic.image), 120, 60);
@@ -159,9 +168,15 @@ public class ExtraTopicAdapter extends ViewPagerAdapter<TopicEntity> {
 						int releaseIconResId = AppSetting.AnswerIcons.Judge.NORMAL_ARRAY[falseIndex];
 						falseIcon.setImageResource(releaseIconResId);
 						
-						if( "1".equals(tmpEntity.result) ) {
-							Log.i("MYTAG",   " 恭喜，正确 ");
-							Toast.makeText(ExtraTopicAdapter.this.mContext, "恭喜，正确！", Toast.LENGTH_SHORT).show();
+						//未做过回答才算成绩
+						if(!tmpEntity.isAnswer) {
+							if( "√".equals(tmpEntity.result) ) {
+								Toast.makeText(ExtraTopicAdapter.this.mContext, "恭喜，正确！", Toast.LENGTH_SHORT).show();
+								tmpEntity.isAnswer = true;
+							}else {
+								Toast.makeText(ExtraTopicAdapter.this.mContext, "回答错误！", Toast.LENGTH_SHORT).show();
+								tmpEntity.isAnswer = true;
+							}
 						}
 					}
 				}
@@ -180,9 +195,15 @@ public class ExtraTopicAdapter extends ViewPagerAdapter<TopicEntity> {
 						int releaseIconResId = AppSetting.AnswerIcons.Judge.NORMAL_ARRAY[trueIndex];
 						trueIcon.setImageResource(releaseIconResId);
 						
-						if( "0".equals(tmpEntity.result) ) {
-							Log.i("MYTAG",   " 恭喜，正确 ");
-							Toast.makeText(ExtraTopicAdapter.this.mContext, "恭喜，正确！", Toast.LENGTH_SHORT).show();
+						//未做过回答才算成绩
+						if(!tmpEntity.isAnswer) {
+							if( "×".equals(tmpEntity.result) ) {
+								tmpEntity.isAnswer = true;
+								Toast.makeText(ExtraTopicAdapter.this.mContext, "恭喜，正确！", Toast.LENGTH_SHORT).show();
+							}else {
+								tmpEntity.isAnswer = true;
+								Toast.makeText(ExtraTopicAdapter.this.mContext, "回答错误！", Toast.LENGTH_SHORT).show();
+							}
 						}
 					}
 				}
@@ -191,7 +212,7 @@ public class ExtraTopicAdapter extends ViewPagerAdapter<TopicEntity> {
 			answerLayout.addView(trueSelection);
 			answerLayout.addView(falseSelection);
 		}else{
-			Log.e("E","判断题只能有两答案选项！");
+			Log.e(Constants.DEBUG_TAG,"判断题只能有两答案选项！");
 		}
 	}
 	
@@ -233,10 +254,20 @@ public class ExtraTopicAdapter extends ViewPagerAdapter<TopicEntity> {
 					}else {
 						AppSetting.AnswerIcons.MultipleChoice.setMultipleResult(index, false);
 					}
-					//答案判断
-					if( AppSetting.AnswerIcons.MultipleChoice.getResultStr().equals(tmpEntity.result) ) {
-						Log.i("MYTAG",  index + " 恭喜，正确 " + answerEntity.isChecked);
-						Toast.makeText(ExtraTopicAdapter.this.mContext, "恭喜，正确！", Toast.LENGTH_SHORT).show();
+					
+					//未做答才判断成绩
+					if(!tmpEntity.isAnswer) {
+						//答案判断
+						Log.i(Constants.DEBUG_TAG,  index + " 多选 " + AppSetting.AnswerIcons.MultipleChoice.getResultStr() + "  " + tmpEntity.result);
+						if( AppSetting.AnswerIcons.MultipleChoice.getResultStr().equals(tmpEntity.result) ) {
+							tmpEntity.isAnswer = true;
+							Log.i(Constants.DEBUG_TAG,  index + " 恭喜，正确 " + answerEntity.isChecked);
+							Toast.makeText(ExtraTopicAdapter.this.mContext, "恭喜，正确！", Toast.LENGTH_SHORT).show();
+						}else if(Util.aHaveBNotExist(AppSetting.AnswerIcons.MultipleChoice.getResultStr(), tmpEntity.result)) {
+							tmpEntity.isAnswer = true;
+							Log.i(Constants.DEBUG_TAG,  index + " 回答错误 " + answerEntity.isChecked);
+							Toast.makeText(ExtraTopicAdapter.this.mContext, "回答错误！", Toast.LENGTH_SHORT).show();
+						}
 					}
 				}
 			});
@@ -283,10 +314,16 @@ public class ExtraTopicAdapter extends ViewPagerAdapter<TopicEntity> {
 						AppSetting.AnswerIcons.SingleChoice.NORMAL_ARRAY[index];
 					icon.setImageResource(iconResId);
 					
-					//答案判断
-					if( answerEntity.isChecked && AppSetting.RESULT[index].equals(tmpEntity.result) ) {
-						Log.i("MYTAG",  index + " 恭喜，正确 " + answerEntity.isChecked);
-						Toast.makeText(ExtraTopicAdapter.this.mContext, "恭喜，正确！", Toast.LENGTH_SHORT).show();
+					//未做答才判断成绩
+					if(!tmpEntity.isAnswer) {
+						//答案判断
+						if( answerEntity.isChecked && AppSetting.RESULT[index].equals(tmpEntity.result) ) {
+							tmpEntity.isAnswer = true;
+							Toast.makeText(ExtraTopicAdapter.this.mContext, "恭喜，正确！", Toast.LENGTH_SHORT).show();
+						}else {
+							tmpEntity.isAnswer = true;
+							Toast.makeText(ExtraTopicAdapter.this.mContext, "回答错误!", Toast.LENGTH_SHORT).show();
+						}
 					}
 				}
 			});

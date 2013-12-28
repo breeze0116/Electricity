@@ -19,5 +19,6 @@
     
     <string name="main_check_update_version">正在检测版本更新...</string>
     <string name="main_check_update_res">正在检测资源更新...</string>
+    <string name="main_init_db">正在初始化数据...</string>
 
 </resources>

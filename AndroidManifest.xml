@@ -33,6 +33,8 @@
         </activity>
         <activity android:name=".ui.HomeActivity" >
         </activity>
+        <activity android:name=".ui.IndexActivity" >
+        </activity>
         <activity android:name=".ui.MenuActivity" >
         </activity>
         <activity android:name=".ui.CategoryActivity" >

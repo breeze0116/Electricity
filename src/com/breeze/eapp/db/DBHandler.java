@@ -5,12 +5,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.breeze.eapp.config.Constants;
+
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 public class DBHandler {
 	private DBHelper dbHelper;
+	private SQLiteDatabase db;
 	
 	/**
 	 * 构造方法
@@ -18,6 +22,7 @@ public class DBHandler {
 	 */
 	public DBHandler(Context context) {
 		this.dbHelper = new DBHelper(context);
+		this.db = dbHelper.openDatabase();
 	}
 	
 	/**
@@ -26,7 +31,7 @@ public class DBHandler {
 	 * @return SQLiteDatabase
 	 */
 	public SQLiteDatabase getWritableDatabase() {
-		return dbHelper.openDatabase();
+		return db;
 	}
 	
 	/**
@@ -35,7 +40,7 @@ public class DBHandler {
 	 * @return SQLiteDatabase
 	 */
 	public SQLiteDatabase getReadableDatabase() {
-		return dbHelper.openDatabase();
+		return db;
 	}
 	
 	/**
@@ -43,14 +48,24 @@ public class DBHandler {
 	 * @param @param db 
 	 * @return void
 	 */
-	public void closeDB(SQLiteDatabase db) {
-//		if(db != null) {
+	public void closeDB(SQLiteDatabase database) {
+//		if(database != null) {
 //			try {
-//				db.close();
+//				database.close();
 //			} catch (Exception e) {
 //				e.printStackTrace();
 //			}
 //		}
+	}
+	
+	public void closeDB() {
+		if(db != null) {
+			try {
+				db.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	/**
